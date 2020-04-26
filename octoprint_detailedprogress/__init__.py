@@ -101,10 +101,11 @@ class DetailedProgressPlugin(octoprint.plugin.EventHandlerPlugin,
 	def _get_time_from_seconds(self, seconds):
 		hours = 0
 		minutes = 0
+		seconds = abs(seconds)
 		if seconds >= 3600:
 			hours = int(seconds / 3600)
 			seconds = seconds % 3600
-		if seconds >= 60:
+		if (seconds >= 60 or seconds <= -60):
 			minutes = int(seconds / 60)
 			seconds = seconds % 60
 		return self._etl_format.format(**locals())
